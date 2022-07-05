@@ -56,7 +56,7 @@ void update(int A[][9][10],int r,int c,int a)
 	}
 	A[r][c][a] = 1;
 }
-//CLEAN1:¬YR¡B¬YC¡B¬Y®c®æ³Ñ¤@®æ¯à¶ñK 
+//CLEAN1:æŸRã€æŸCã€æŸå®®æ ¼å‰©ä¸€æ ¼èƒ½å¡«K 
 
 int  cleanone(int A[][9][10]){
 	int flags=0;
@@ -124,8 +124,8 @@ int  cleanone(int A[][9][10]){
 	return 0;
 }
 
-//CLEAN2:¬YR¡B¬YC¡B¬Y®c®æ¤¤¦³¤G®æ³Ñ¨â­Ó¼Æ¦r¯à¶ñ¡A¥B³o¨â­Ó¼Æ¦r¤@¼Ë 
-//sametwo :find¨º¨Ç®æ³Ñ¤G­Ó¥i¯à¼Æ// 
+//CLEAN2:æŸRã€æŸCã€æŸå®®æ ¼ä¸­æœ‰äºŒæ ¼å‰©å…©å€‹æ•¸å­—èƒ½å¡«ï¼Œä¸”é€™å…©å€‹æ•¸å­—ä¸€æ¨£ 
+//sametwo :findé‚£äº›æ ¼å‰©äºŒå€‹å¯èƒ½æ•¸// 
 /*oid lasttwo(int test[9][9][1],int A[][9][10]){
 	
 	for(int i=0;i<9;i++){
@@ -141,7 +141,7 @@ int  cleanone(int A[][9][10]){
 	}
 	
 }
-//store (i,j) ªº°ß¤G¼Æ¦r 
+//store (i,j) çš„å”¯äºŒæ•¸å­— 
 void compare(int same[9][9][2],int A[][9][10],int test[9][9][1]){
 	
 	for(int i=0;i<9;i++){
