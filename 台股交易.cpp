@@ -9,26 +9,26 @@ using namespace std;
 
 
 
-int tradetime[9]={0,0,0,0,0,0,0,0,0};//¨C­Óµ¦²¤ªºÁ`¥æ©ö¦¸¼Æ 
+int tradetime[9]={0,0,0,0,0,0,0,0,0};//æ¯å€‹ç­–ç•¥çš„ç¸½äº¤æ˜“æ¬¡æ•¸ 
 struct TX{
 	int year,month,day,exdate;
-	int price[285][3];//¬ö¿ı¤p®É¡B¤ÀÄÁ¡B»ù®æ 
+	int price[285][3];//ç´€éŒ„å°æ™‚ã€åˆ†é˜ã€åƒ¹æ ¼ 
 	 
 };
 //////1//////
-int strategy1(TX* ptx)//¨C­Óstrategy¥u­pºâ¤@¤Ñ 
+int strategy1(TX* ptx)//æ¯å€‹strategyåªè¨ˆç®—ä¸€å¤© 
 {
 	
 	int r = (ptx->price[284][2]-ptx->price[0][2])*200;
 	//cout<<r<<endl;
 	tradetime[1]++;
-	return r;//r¬O·í¤ÑÀò§Q 
+	return r;//ræ˜¯ç•¶å¤©ç²åˆ© 
 } 
 //////2////
 int strategy2(TX* ptx,double stoploss)
 {
-	int cost=ptx->price[0][2];//¤@¤Ñªº²Ä¤@­Ó»ù®æ¬O¦¨¥» 
-	int slp = (int)(cost*(1-stoploss)+0.5);//±j¨î¥|±Ë¤­¤J
+	int cost=ptx->price[0][2];//ä¸€å¤©çš„ç¬¬ä¸€å€‹åƒ¹æ ¼æ˜¯æˆæœ¬ 
+	int slp = (int)(cost*(1-stoploss)+0.5);//å¼·åˆ¶å››æ¨äº”å…¥
 	int final_price;
 	int n;
 	for(n=1;n<285;n++)
@@ -37,7 +37,7 @@ int strategy2(TX* ptx,double stoploss)
 		if(ptx->price[n][2]<=slp)
 		{
 			tradetime[2]++;
-			//cout<<"°±·l"<<endl;
+			//cout<<"åœæ"<<endl;
 			break; 
 		}
 		
@@ -48,8 +48,8 @@ int strategy2(TX* ptx,double stoploss)
 //////3///////
 int strategy3(TX* ptx,double stoploss,double takeprofit)
 {
-	int cost=ptx->price[0][2];//¤@¤Ñªº²Ä¤@­Ó»ù®æ¬O¦¨¥» 
-	int slp = (int)(cost*(1-stoploss)+0.5);//±j¨î¥|±Ë¤­¤J
+	int cost=ptx->price[0][2];//ä¸€å¤©çš„ç¬¬ä¸€å€‹åƒ¹æ ¼æ˜¯æˆæœ¬ 
+	int slp = (int)(cost*(1-stoploss)+0.5);//å¼·åˆ¶å››æ¨äº”å…¥
 	int tpp = (int)(cost*(1+takeprofit)+0.5);
 	int final_price;
 	int n;
@@ -60,13 +60,13 @@ int strategy3(TX* ptx,double stoploss,double takeprofit)
 		if(ptx->price[n][2]<=slp)
 		{
 			tradetime[3]++;
-		//	cout<<"°±·l"<<endl;
+		//	cout<<"åœæ"<<endl;
 			break; 
 		}
 		if(ptx->price[n][2]>=tpp)
 		{
 			tradetime[3]++;
-		//	cout<<"°±§Q"<<endl;
+		//	cout<<"åœåˆ©"<<endl;
 			break; 
 		}
 	} 
@@ -134,9 +134,9 @@ int strategy4(TX* ptx)
 
 
 ///5555555555555555555555555555555555555
-int k=0;//¥Nªí²Äk¤Ñ 
+int k=0;//ä»£è¡¨ç¬¬kå¤© 
 int dailymax[245],dailymin[245];
-void dailyprice(TX* data, int day_number)	//¥\¯à:§ä¥X¤@¤Ñ¤¤ªº»ù®æ³Ì¤j³Ì¤p­È 
+void dailyprice(TX* data, int day_number)	//åŠŸèƒ½:æ‰¾å‡ºä¸€å¤©ä¸­çš„åƒ¹æ ¼æœ€å¤§æœ€å°å€¼ 
 {
 	TX *ptx;
 	int day_count;
@@ -147,12 +147,12 @@ void dailyprice(TX* data, int day_number)	//¥\¯à:§ä¥X¤@¤Ñ¤¤ªº»ù®æ³Ì¤j³Ì¤p­È
 			
 	
 	int m=0;
-	while(ptx->price[m][0]!=13 || ptx->price[m][1]!=29)//¤£¬O¤@¤Ñªº³Ì«á¤@¤ÀÄÁ->°õ¦æ 
+	while(ptx->price[m][0]!=13 || ptx->price[m][1]!=29)//ä¸æ˜¯ä¸€å¤©çš„æœ€å¾Œä¸€åˆ†é˜->åŸ·è¡Œ 
 	{
 				
-		if(ptx->price[m][2] > dailymax[k]) 	dailymax[k]=ptx->price[m][2];//§ä¥X³Ì¤j­È¨Ã¦s¤Jdailymax[]¤¤ 
+		if(ptx->price[m][2] > dailymax[k]) 	dailymax[k]=ptx->price[m][2];//æ‰¾å‡ºæœ€å¤§å€¼ä¸¦å­˜å…¥dailymax[]ä¸­ 
 		
-		if(dailymin[k] > ptx->price[m][2])    dailymin[k] = ptx->price[m][2];//§ä¥X³Ì¤p­È¨Ã¦s¤Jdailymin[]¤¤ 
+		if(dailymin[k] > ptx->price[m][2])    dailymin[k] = ptx->price[m][2];//æ‰¾å‡ºæœ€å°å€¼ä¸¦å­˜å…¥dailymin[]ä¸­ 
 		
 		m++;
 	}
@@ -178,8 +178,8 @@ int strategy5(TX *ptx,int gap)
 	for(int i=0;i<285;i++)
 	{
 	
-		avg5max[i+5]=(dailymax[i]+dailymax[i+1]+dailymax[i+2]+dailymax[i+3]+dailymax[i+4])/5;//§ä¥X«e¤­¤Ñ³Ì¤j»ù¿úªº¥­§¡­È 
-		avg5min[i+5]=(dailymin[i]+dailymin[i+1]+dailymin[i+2]+dailymin[i+3]+dailymin[i+4])/5;//§ä¥X«e¤­¤Ñ³Ì¤p»ù¿úªº¥­§¡­È 
+		avg5max[i+5]=(dailymax[i]+dailymax[i+1]+dailymax[i+2]+dailymax[i+3]+dailymax[i+4])/5;//æ‰¾å‡ºå‰äº”å¤©æœ€å¤§åƒ¹éŒ¢çš„å¹³å‡å€¼ 
+		avg5min[i+5]=(dailymin[i]+dailymin[i+1]+dailymin[i+2]+dailymin[i+3]+dailymin[i+4])/5;//æ‰¾å‡ºå‰äº”å¤©æœ€å°åƒ¹éŒ¢çš„å¹³å‡å€¼ 
 		//cout<<i<<": "<<dailymax[i+5]<<" "<<past3min[i+5]<<'\n';
 
 	}
@@ -188,7 +188,7 @@ int strategy5(TX *ptx,int gap)
 	
 	for(int n=5;n<285;n++)
 	{
-		if(ptx->price[n][2] - avg5max[day]>=0&& ptx->price[n][2] - avg5max[day]>=gap)//·í{²Än¤Ñ¬Y¤@®É¨èªº»ù¿ú}´î±¼{«e¤­¤Ñ(n-5,n-4,n-3,n-2,n-1)³Ì°ª»ù¿úªº¥­§¡}¤j©ó¯S©wªº¼Æ­È¡A«h½æ¥X
+		if(ptx->price[n][2] - avg5max[day]>=0&& ptx->price[n][2] - avg5max[day]>=gap)//ç•¶{ç¬¬nå¤©æŸä¸€æ™‚åˆ»çš„åƒ¹éŒ¢}æ¸›æ‰{å‰äº”å¤©(n-5,n-4,n-3,n-2,n-1)æœ€é«˜åƒ¹éŒ¢çš„å¹³å‡}å¤§æ–¼ç‰¹å®šçš„æ•¸å€¼ï¼Œå‰‡è³£å‡º
 		{
 			if(position==1)
 			{
@@ -202,9 +202,9 @@ int strategy5(TX *ptx,int gap)
 				cost = ptx->price[n][2];
 			}
 			
-			tradetime[5]++;//¥æ©ö¦¸¼Æ¥[¤@ 
+			tradetime[5]++;//äº¤æ˜“æ¬¡æ•¸åŠ ä¸€ 
 		}
-		if( avg5min[day]- ptx->price[n][2] >=gap)//·í{«e¤­¤Ñ(n-5,n-4,n-3,n-2,n-1)³Ì§C»ù¿úªº¥­§¡}´î±¼{²Än¤Ñ¬Y¤@®É¨èªº»ù¿ú}¤j©ó¯S©w¼Æ­È
+		if( avg5min[day]- ptx->price[n][2] >=gap)//ç•¶{å‰äº”å¤©(n-5,n-4,n-3,n-2,n-1)æœ€ä½åƒ¹éŒ¢çš„å¹³å‡}æ¸›æ‰{ç¬¬nå¤©æŸä¸€æ™‚åˆ»çš„åƒ¹éŒ¢}å¤§æ–¼ç‰¹å®šæ•¸å€¼
 		{
 			if(position==1)
 			{
@@ -217,11 +217,11 @@ int strategy5(TX *ptx,int gap)
 				cost = ptx->price[n][2];
 			}
 			
-			tradetime[5]++;//¥æ©ö¦¸¼Æ¥[¤@ 
+			tradetime[5]++;//äº¤æ˜“æ¬¡æ•¸åŠ ä¸€ 
 			
 		}
 	}
-	//¤@¤Ñªº³Ì«á¤@¤ÀÄÁ: 
+	//ä¸€å¤©çš„æœ€å¾Œä¸€åˆ†é˜: 
 	if(position==1)
 	{
 	
@@ -256,12 +256,12 @@ int strategy6(TX *ptx,double rate)
 		sum=0;
 		for(i=n-9;i<=n;i++)
 			sum+=ptx->price[i][2];
-		MA6[n]=sum/10;//MA6¬°³sÄò¤Q¤Ñªº¥­§¡»ù¿ú 
+		MA6[n]=sum/10;//MA6ç‚ºé€£çºŒåå¤©çš„å¹³å‡åƒ¹éŒ¢ 
 	}
 	for(n=9;n<285;n++)
 	{
 		if((MA6[n]>=ptx->price[n][2])&&(double)((MA6[n]-ptx->price[n][2])/MA6[n])>rate)
-		//µø MA6[n]¬°¦¨¥»(¥­§¡)¡A­Y·í®É»ù¿úªºÂ÷§¡®t©M¦¨¥»¦¨¤@©wªº¤ñ²vÃö«Y¡A«h¶i¦æ¥æ©ö //
+		//è¦– MA6[n]ç‚ºæˆæœ¬(å¹³å‡)ï¼Œè‹¥ç•¶æ™‚åƒ¹éŒ¢çš„é›¢å‡å·®å’Œæˆæœ¬æˆä¸€å®šçš„æ¯”ç‡é—œä¿‚ï¼Œå‰‡é€²è¡Œäº¤æ˜“ //
 		{
 			if(position==0)
 			{
@@ -291,7 +291,7 @@ int strategy6(TX *ptx,double rate)
 			}
 		}
 	}
-	if(n==284)//¨C¤Ñªº³Ì«á¤@¤ÀÄÁ:
+	if(n==284)//æ¯å¤©çš„æœ€å¾Œä¸€åˆ†é˜:
 	{
 		if(position==1)
 		{
@@ -319,7 +319,7 @@ int strategy7(TX *ptx,int gap)
 	int position=0,cost=0,r=0;
 	for(int i=1;i<285;i++)
 	{
-		if(ptx->price[i-1][2]-ptx->price[i][2]>=gap)//·í²Äi-1¤ÀÄÁªº»ù®æ©M²Äi¤ÀÄÁ(¦¹®É®É¶¡)ªº»ù®æ¬°®t¶Z¤j©ógap ¶i¦æ¥æ©ö 
+		if(ptx->price[i-1][2]-ptx->price[i][2]>=gap)//ç•¶ç¬¬i-1åˆ†é˜çš„åƒ¹æ ¼å’Œç¬¬iåˆ†é˜(æ­¤æ™‚æ™‚é–“)çš„åƒ¹æ ¼ç‚ºå·®è·å¤§æ–¼gap é€²è¡Œäº¤æ˜“ 
 		{
 			if(position==1)
 			{
@@ -347,7 +347,7 @@ int strategy7(TX *ptx,int gap)
 				tradetime[7]++;
 			}
 		}
-		if(i==284)//¨C¤éªº³Ì«á¤@¤ÀÄÁ 
+		if(i==284)//æ¯æ—¥çš„æœ€å¾Œä¸€åˆ†é˜ 
 		{
 			if(position==1)
 			{
@@ -375,30 +375,30 @@ int strategy8(TX *ptx)
 	
 	if(dailymax[i]>=dailymax[i+1] && dailymax[i]>=dailymax[i+2]) past3max[i+3]=dailymax[i];
 		else if(dailymax[i+1]>=dailymax[i] && dailymax[i+1]>=dailymax[i+2]) past3max[i+3]=dailymax[i+1];
-		else past3max[i+3]=dailymax[i+2];//past3max[i]:¹L¥h¤T¤Ñ(i-3~i-1)¤¤³Ì¤j³Ì¤p­È 
+		else past3max[i+3]=dailymax[i+2];//past3max[i]:éå»ä¸‰å¤©(i-3~i-1)ä¸­æœ€å¤§æœ€å°å€¼ 
 		
 	if(dailymin[i]<=dailymin[i+1] && dailymin[i]<=dailymin[i+2]) past3min[i+3]=dailymin[i];
 		else if  (dailymin[i+1]<=dailymin[i] && dailymin[i+1]<=dailymin[i+2]) past3min[i+3]=dailymin[i+1];
 		else past3min[i+3]=dailymin[i+2];
 	}
 	int r=0,flag=0,final=0,premax=0,prepremax=0;	
-	if(day8<=2) day8++;//«e¤T¤Ñ¬°Æ[¹î´Á¡A¤£¥æ©ö 
+	if(day8<=2) day8++;//å‰ä¸‰å¤©ç‚ºè§€å¯ŸæœŸï¼Œä¸äº¤æ˜“ 
 	else if(day8<245)
 	{
 		for(int i=0;i<285;i++)
 		{
 			if(ptx->price[i][2]>past3max[day])
 			{
-				final=ptx->price[i][2];//²Än¤Ñ¬Y­Ó®É¨è(i)ªº»ù¿ú(final)¤j©ó«e¤T¤Ñªº³Ì°ª»ù¿ú«h½æ¥X 
+				final=ptx->price[i][2];//ç¬¬nå¤©æŸå€‹æ™‚åˆ»(i)çš„åƒ¹éŒ¢(final)å¤§æ–¼å‰ä¸‰å¤©çš„æœ€é«˜åƒ¹éŒ¢å‰‡è³£å‡º 
 				flag=-1;
 				if(i>260) break;
 				//flag++;
-				for(int j=i+1;j<285<final;j++)//Ä~Äò§ä¥X¤@­Ó¤p©ófinalªº»ù¿ú(premax)
+				for(int j=i+1;j<285<final;j++)//ç¹¼çºŒæ‰¾å‡ºä¸€å€‹å°æ–¼finalçš„åƒ¹éŒ¢(premax)
 				{
 					if(ptx->price[j][2]<final)
 					{
 						premax=(ptx->price[j][2]);
-						for(int k=j+1;k<285;k++)//§ä¥X¤@­Ó¤p©ópremaxªº»ù¿ú(prepremax)¨Ã¶R¤J
+						for(int k=j+1;k<285;k++)//æ‰¾å‡ºä¸€å€‹å°æ–¼premaxçš„åƒ¹éŒ¢(prepremax)ä¸¦è²·å…¥
 						{
 							if(ptx->price[k][2]<premax)
 							{
@@ -415,8 +415,8 @@ int strategy8(TX *ptx)
 			}
 	}
 
-	if(final-prepremax>10000) r=0;//¦]¬°prepremax¬°0¡A©Ò¥H¤£¥æ©ö 
-	else r=final-prepremax;//·í¤é³Ì²×Àò§Q 
+	if(final-prepremax>10000) r=0;//å› ç‚ºprepremaxç‚º0ï¼Œæ‰€ä»¥ä¸äº¤æ˜“ 
+	else r=final-prepremax;//ç•¶æ—¥æœ€çµ‚ç²åˆ© 
 	//cout<<day8<<": "<<final<<"premax"<<premax<<" "<<prepremax<<"r  "<<r<<'\n';
 	day8++;
 	}	
@@ -430,8 +430,8 @@ int trading(TX* data, int day_number, int strategy_no)
 
 	TX *ptx;
 	int day_count;
-	int R = 0;//R=Àò§Q
-	ptx = data;//±q²Ä0¤Ñ¶}©l
+	int R = 0;//R=ç²åˆ©
+	ptx = data;//å¾ç¬¬0å¤©é–‹å§‹
 	for(int i=0;i<10;i++) {
 		maxp[i]=0;
 		minp[i]=100000;
@@ -442,8 +442,8 @@ int trading(TX* data, int day_number, int strategy_no)
 		switch(strategy_no)
 		{
 			case 1:
-				if(maxp[1]<strategy1(ptx)) maxp[1]=strategy1(ptx);//maxp¥\¯à:§ä¥X³æ¤é¥æ©ö³Ì¤j­È 
-				if(minp[1]>strategy1(ptx)) minp[1]=strategy1(ptx);//minp¥\¯à:§ä¥X³æ¤é¥æ©ö³Ì¤p­È 
+				if(maxp[1]<strategy1(ptx)) maxp[1]=strategy1(ptx);//maxpåŠŸèƒ½:æ‰¾å‡ºå–®æ—¥äº¤æ˜“æœ€å¤§å€¼ 
+				if(minp[1]>strategy1(ptx)) minp[1]=strategy1(ptx);//minpåŠŸèƒ½:æ‰¾å‡ºå–®æ—¥äº¤æ˜“æœ€å°å€¼ 
 				R+=strategy1(ptx);
 				break;
 			case 2:
@@ -494,7 +494,7 @@ int trading(TX* data, int day_number, int strategy_no)
 
 const int C = 1109,  G = 1661, A = 1865;
 /////////do///////// la///////si//////
-const int T = 50;////®É¶¡¶¡¹j80ÀW 
+const int T = 50;////æ™‚é–“é–“éš”80é » 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -503,19 +503,19 @@ int main()
 	
 	
 	
-	HANDLE hConsole;//ÃC¦â±±¨î¥x 
-	int day_number,count=0,m,a=0;//m¬O·í¤Ñ²Ä´X¤ÀÄÁ 
+	HANDLE hConsole;//é¡è‰²æ§åˆ¶å° 
+	int day_number,count=0,m,a=0;//mæ˜¯ç•¶å¤©ç¬¬å¹¾åˆ†é˜ 
 	 
 	char c,str[101];
 	int year,month,day,hour,minute,exdate,price;
 	TX *data, *ptx;
 	ifstream fin;
 	fin.open("TXF_minute_2021_285.csv");
-	fin.getline(str,100);//Åª±¼²Ä¤@¦æ 
+	fin.getline(str,100);//è®€æ‰ç¬¬ä¸€è¡Œ 
 	while(fin>>year)
 	{
 		a++;
-		fin>>c;//Åª±×½u
+		fin>>c;//è®€æ–œç·š
 		fin>>month>>c; 
 		fin>>day>>c;
 		fin>>hour>>c;
@@ -527,25 +527,25 @@ int main()
 			//cout<<year<<"/"<<month<<"/"<<day<<endl;
 			count++;
 		}
-	}//ª½¨ìÅª¤£¨ìint 
+	}//ç›´åˆ°è®€ä¸åˆ°int 
 	fin.close();
-	day_number=count;//¦³´X¤Ñ 
+	day_number=count;//æœ‰å¹¾å¤© 
 	//cout<<day_number<<endl;
-	data=new TX[day_number];//°ÊºA
-	ptx = data;//ptx·|«ü¦V·í®É­n³B²zªº¨º­ÓTX¡A³o¸Ì¥ı³]¦b²Ä0¤Ñ 
+	data=new TX[day_number];//å‹•æ…‹
+	ptx = data;//ptxæœƒæŒ‡å‘ç•¶æ™‚è¦è™•ç†çš„é‚£å€‹TXï¼Œé€™è£¡å…ˆè¨­åœ¨ç¬¬0å¤© 
 	fin.open("TXF_minute_2021_285.csv");
-	fin.getline(str,100);//Åª±¼²Ä¤@¦æ 
+	fin.getline(str,100);//è®€æ‰ç¬¬ä¸€è¡Œ 
 	m=0; 
 	while(fin>>year)
 	{
-		fin>>c;//Åª±×½u
+		fin>>c;//è®€æ–œç·š
 		fin>>month>>c; 
 		fin>>day>>c;
 		fin>>hour>>c;
 		fin>>minute>>c;
 		fin>>exdate>>c;
 		fin>>price;
-		if(m==0)//Åª¨ì²Ä¤@¤ÀÄÁªº¸ê®Æ 
+		if(m==0)//è®€åˆ°ç¬¬ä¸€åˆ†é˜çš„è³‡æ–™ 
 		{
 			ptx->year=year;
 			ptx->month=month;
@@ -565,75 +565,75 @@ int main()
 	fin.close();
 	
 
-	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);//ÃC¦â±±¨î 
+	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);//é¡è‰²æ§åˆ¶ 
 	
 	
 	
-	SetConsoleTextAttribute(hConsole,95);//§ïÃC¦â 
+	SetConsoleTextAttribute(hConsole,95);//æ”¹é¡è‰² 
    
     
-	cout<<"µ¦²¤¤@(buy and hold)-- "<< endl;
-	cout<<"¥iÀò§Q:"<<trading(data,day_number,1)<<endl; 
-	cout<<"³æ¤é³Ì¤jÀò§Q: "<<maxp[1]<<endl;
-	cout<<"³æ¤é³Ì¤jÁ«·l: "<<minp[1]<<endl;
-	cout<<"¥æ©ö¦¸¼Æ"<<tradetime[1]<<endl;
+	cout<<"ç­–ç•¥ä¸€(buy and hold)-- "<< endl;
+	cout<<"å¯ç²åˆ©:"<<trading(data,day_number,1)<<endl; 
+	cout<<"å–®æ—¥æœ€å¤§ç²åˆ©: "<<maxp[1]<<endl;
+	cout<<"å–®æ—¥æœ€å¤§è™§æ: "<<minp[1]<<endl;
+	cout<<"äº¤æ˜“æ¬¡æ•¸"<<tradetime[1]<<endl;
 	
-	SetConsoleTextAttribute(hConsole,112 );//§ïÃC¦â 
+	SetConsoleTextAttribute(hConsole,112 );//æ”¹é¡è‰² 
 	
-	cout<<"µ¦²¤¤G(B&H+°±·l)-- "<<endl;
-	cout<<"¥iÀò§Q: "<<trading(data,day_number,2)<<endl; 
-	cout<<"³æ¤é³Ì¤jÀò§Q: "<<maxp[2]<<endl;
-	cout<<"³æ¤é³Ì¤jÁ«·l: "<<minp[2]<<endl;
-	cout<<"¥æ©ö¦¸¼Æ"<<tradetime[2]<<endl;
+	cout<<"ç­–ç•¥äºŒ(B&H+åœæ)-- "<<endl;
+	cout<<"å¯ç²åˆ©: "<<trading(data,day_number,2)<<endl; 
+	cout<<"å–®æ—¥æœ€å¤§ç²åˆ©: "<<maxp[2]<<endl;
+	cout<<"å–®æ—¥æœ€å¤§è™§æ: "<<minp[2]<<endl;
+	cout<<"äº¤æ˜“æ¬¡æ•¸"<<tradetime[2]<<endl;
 	
-	SetConsoleTextAttribute(hConsole,224 );//§ïÃC¦â 
+	SetConsoleTextAttribute(hConsole,224 );//æ”¹é¡è‰² 
 	
-	cout<<"µ¦²¤¤T(B&H+°±·l°±§Q)--"<<endl;
-	cout<<"¥iÀò§Q: "<<trading(data,day_number,3)<<endl;
-	cout<<"µ¦²¤¤T³æ¤é³Ì¤jÀò§Q"<<maxp[3]<<endl;
-	cout<<"µ¦²¤¤T³æ¤é³Ì¤jÁ«·l"<<minp[3]<<endl;
-	cout<<"¥æ©ö¦¸¼Æ"<<tradetime[3]<<endl;
+	cout<<"ç­–ç•¥ä¸‰(B&H+åœæåœåˆ©)--"<<endl;
+	cout<<"å¯ç²åˆ©: "<<trading(data,day_number,3)<<endl;
+	cout<<"ç­–ç•¥ä¸‰å–®æ—¥æœ€å¤§ç²åˆ©"<<maxp[3]<<endl;
+	cout<<"ç­–ç•¥ä¸‰å–®æ—¥æœ€å¤§è™§æ"<<minp[3]<<endl;
+	cout<<"äº¤æ˜“æ¬¡æ•¸"<<tradetime[3]<<endl;
 	
-	SetConsoleTextAttribute(hConsole,249 );	//§ïÃC¦â 
-	cout<<"µ¦²¤¥|(Â²¤Æª©¸¯ÄõºÑ¥æ©öªk«h)--"<<endl;
-	cout<<"¥iÀò§Q: "<<trading(data,day_number,4)<<endl; 
-	cout<<"³æ¤é³Ì¤jÀò§Q: "<<maxp[4]<<endl;
-	cout<<"³æ¤é³Ì¤jÁ«·l: "<<minp[4]<<endl;
-	cout<<"¥æ©ö¦¸¼Æ"<<tradetime[4]<<endl;
+	SetConsoleTextAttribute(hConsole,249 );	//æ”¹é¡è‰² 
+	cout<<"ç­–ç•¥å››(ç°¡åŒ–ç‰ˆè‘›è˜­ç¢§äº¤æ˜“æ³•å‰‡)--"<<endl;
+	cout<<"å¯ç²åˆ©: "<<trading(data,day_number,4)<<endl; 
+	cout<<"å–®æ—¥æœ€å¤§ç²åˆ©: "<<maxp[4]<<endl;
+	cout<<"å–®æ—¥æœ€å¤§è™§æ: "<<minp[4]<<endl;
+	cout<<"äº¤æ˜“æ¬¡æ•¸"<<tradetime[4]<<endl;
 	
-	SetConsoleTextAttribute(hConsole,46 );//§ïÃC¦â 
+	SetConsoleTextAttribute(hConsole,46 );//æ”¹é¡è‰² 
 	
 	
 	 dailyprice(data,day_number);
-	cout<<"µ¦²¤¤­(³Ì¤j³Ì¤p¥­§¡­È)--"<<endl;	
-	cout<<"¥iÀò§Q: "<<trading(data,day_number,5)<<endl;
-	cout<<"µ¦²¤³æ¤é³Ì¤jÀò§Q"<<maxp[5]<<endl;
-	cout<<"µ¦²¤5³æ¤é³Ì¤jÁ«·l"<<minp[5]<<endl;
-	cout<<"¥æ©ö¦¸¼Æ"<<tradetime[5]<<endl;
+	cout<<"ç­–ç•¥äº”(æœ€å¤§æœ€å°å¹³å‡å€¼)--"<<endl;	
+	cout<<"å¯ç²åˆ©: "<<trading(data,day_number,5)<<endl;
+	cout<<"ç­–ç•¥å–®æ—¥æœ€å¤§ç²åˆ©"<<maxp[5]<<endl;
+	cout<<"ç­–ç•¥5å–®æ—¥æœ€å¤§è™§æ"<<minp[5]<<endl;
+	cout<<"äº¤æ˜“æ¬¡æ•¸"<<tradetime[5]<<endl;
 
-	SetConsoleTextAttribute(hConsole,188 );//§ïÃC¦â 
-	cout<<"µ¦²¤¤»(Â÷§¡®t)--"<<endl;
-	cout<<"¥iÀò§Q: "<<trading(data,day_number,6)<<endl;
-	cout<<"µ¦²¤¤»³æ¤é³Ì¤jÀò§Q"<<maxp[6]<<endl;
-	cout<<"µ¦²¤¤»³æ¤é³Ì¤jÁ«·l"<<minp[6]<<endl;
-	cout<<"¥æ©ö¦¸¼Æ"<<tradetime[6]<<endl;
+	SetConsoleTextAttribute(hConsole,188 );//æ”¹é¡è‰² 
+	cout<<"ç­–ç•¥å…­(é›¢å‡å·®)--"<<endl;
+	cout<<"å¯ç²åˆ©: "<<trading(data,day_number,6)<<endl;
+	cout<<"ç­–ç•¥å…­å–®æ—¥æœ€å¤§ç²åˆ©"<<maxp[6]<<endl;
+	cout<<"ç­–ç•¥å…­å–®æ—¥æœ€å¤§è™§æ"<<minp[6]<<endl;
+	cout<<"äº¤æ˜“æ¬¡æ•¸"<<tradetime[6]<<endl;
 	
-	SetConsoleTextAttribute(hConsole,206);//§ïÃC¦â 
-	cout<<"µ¦²¤¤C(GAP)--"<<endl;
-	cout<<"¥iÀò§Q: "<<trading(data,day_number,7)<<endl;
-	cout<<"µ¦²¤¤C³æ¤é³Ì¤jÀò§Q"<<maxp[7]<<endl;
-	cout<<"µ¦²¤¤C³æ¤é³Ì¤jÁ«·l"<<minp[7]<<endl;
-	cout<<"¥æ©ö¦¸¼Æ"<<tradetime[7]<<endl;
+	SetConsoleTextAttribute(hConsole,206);//æ”¹é¡è‰² 
+	cout<<"ç­–ç•¥ä¸ƒ(GAP)--"<<endl;
+	cout<<"å¯ç²åˆ©: "<<trading(data,day_number,7)<<endl;
+	cout<<"ç­–ç•¥ä¸ƒå–®æ—¥æœ€å¤§ç²åˆ©"<<maxp[7]<<endl;
+	cout<<"ç­–ç•¥ä¸ƒå–®æ—¥æœ€å¤§è™§æ"<<minp[7]<<endl;
+	cout<<"äº¤æ˜“æ¬¡æ•¸"<<tradetime[7]<<endl;
 	
-	SetConsoleTextAttribute(hConsole,226);//§ïÃC¦â 
-	cout<<"µ¦²¤¤K(³Ì¤j­È)--"<<endl;
-	cout<<"¥iÀò§Q: "<<trading(data,day_number,8)<<endl;
-	cout<<"µ¦²¤¤K³æ¤é³Ì¤jÀò§Q"<<maxp[8]<<endl;
-	cout<<"µ¦²¤¤K³æ¤é³Ì¤jÁ«·l"<<minp[8]<<endl;
-	cout<<"¥æ©ö¦¸¼Æ"<<tradetime[8]<<endl;
+	SetConsoleTextAttribute(hConsole,226);//æ”¹é¡è‰² 
+	cout<<"ç­–ç•¥å…«(æœ€å¤§å€¼)--"<<endl;
+	cout<<"å¯ç²åˆ©: "<<trading(data,day_number,8)<<endl;
+	cout<<"ç­–ç•¥å…«å–®æ—¥æœ€å¤§ç²åˆ©"<<maxp[8]<<endl;
+	cout<<"ç­–ç•¥å…«å–®æ—¥æœ€å¤§è™§æ"<<minp[8]<<endl;
+	cout<<"äº¤æ˜“æ¬¡æ•¸"<<tradetime[8]<<endl;
 	//MUSIC//LITTLE STAR
 	
-	Beep( C, T  );//ÅT¤@Ándo,¦AªÅ200ÀWªº®É¶¡ 
+	Beep( C, T  );//éŸ¿ä¸€è²do,å†ç©º200é »çš„æ™‚é–“ 
     Beep( G, T  *4/3);
     Beep( A, T *4/3);
     Beep( G, T  *4/3);
