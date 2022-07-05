@@ -71,7 +71,7 @@ void allocate(int **r,int IDnumber)
 }
 
 
-void newplane(int **r,bool *ID,int *Flevel,int *number)//²£¥Í·s­¸¾÷¨Ã¤À°t¨ì¶]¹D¸Ì 
+void newplane(int **r,bool *ID,int *Flevel,int *number)//ç”¢ç”Ÿæ–°é£›æ©Ÿä¸¦åˆ†é…åˆ°è·‘é“è£¡ 
 {
 	cout<<"Step 1:\n"<<"landing plane: ";
 	for(int i=0;i<randland;i++)
@@ -117,7 +117,7 @@ void newplane(int **r,bool *ID,int *Flevel,int *number)//²£¥Í·s­¸¾÷¨Ã¤À°t¨ì¶]¹D¸
 	}
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////
-int  pop(int **r,bool *ID,int element,int row,int *rear)//element¬O¦barray¤¤ªº¦ì¸m 
+int  pop(int **r,bool *ID,int element,int row,int *rear)//elementæ˜¯åœ¨arrayä¸­çš„ä½ç½® 
 {
 	ID[abs(r[row][element])]=0;
 	int target=r[row][element];//error
@@ -146,7 +146,7 @@ void chooseway(int **r,bool *ID,int *Flevel,int *rear)
 	for(int i=0;i<5;i++) r[0][i]=0;//record if runway is full
 	int nofuel=0;
 	int warning =0;
-	int record[100]={0};//¼È¦snofuel id 
+	int record[100]={0};//æš«å­˜nofuel id 
 	int out[100]={0};//record out id
 	for(int i=1;i<=4;i++)
 	{
@@ -230,7 +230,7 @@ void chooseway(int **r,bool *ID,int *Flevel,int *rear)
 		if(a%10==b%10) b-=10;
 		int out2=pop(r,ID,b/10,b%10,rear);
 		if(a%10==c%10) c-=20;
-		else if(b%10==c%10) c-=10;//­×¥¿c/10 
+		else if(b%10==c%10) c-=10;//ä¿®æ­£c/10 
 		int out3=pop(r,ID,c/10,c%10,rear);
 		out[1]=out1;
 		
@@ -390,7 +390,7 @@ int main ()
 	int Flevel[Capacity]={0};
 	bool ID[Capacity]={0};//record the ID if is still in queue or poped
 	int Time[Capacity]={0};//Time[1~N]=wating/landing  time
-	int runway[5][Capacity]={0};//runway[¶]¹D][1~N]=ID 
+	int runway[5][Capacity]={0};//runway[è·‘é“][1~N]=ID 
 	int *r[5]={runway[0],runway[1],runway[2],runway[3],runway[4]};
 	//runway[0][p] records if runway p has choosen a plane to land or take off
 	//runway[1~4][0] records left landing queue size
