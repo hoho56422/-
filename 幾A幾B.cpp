@@ -20,10 +20,10 @@ int main()
 	 cout<<"Please input your guess: ";
 	    cin>>tmp;
 	    while(sep(tmp,uA)==0){
-	    cout<<"½Ğ¿é¤J¦Xªk¼Æ­È(4¦ì¤£­«½Æªº¼Æ)"<<endl;	
+	    cout<<"è«‹è¼¸å…¥åˆæ³•æ•¸å€¼(4ä½ä¸é‡è¤‡çš„æ•¸)"<<endl;	
 		cout<<"Please input your guess: ";
 		cin>>tmp;
-		}//input¨¾§b 
+		}//inputé˜²å‘† 
 	do{
 		x= rand()%10000;
 		
@@ -48,7 +48,7 @@ int main()
 	    cout<<"Please input your guess: ";
 	    cin>>tp;
 	    while(sep(tp,uG)==0){
-	    cout<<"½Ğ¿é¤J¦Xªk¼Æ­È(4¦ì¤£­«½Æªº¼Æ)"<<endl;	
+	    cout<<"è«‹è¼¸å…¥åˆæ³•æ•¸å€¼(4ä½ä¸é‡è¤‡çš„æ•¸)"<<endl;	
 		cout<<"Please input your guess: ";
 		cin>>tp;
 		}
@@ -136,7 +136,7 @@ int computerGuess(int T[])
 	}
 }
  
-void updateT(int T[],int G[],int AB[])//½T»{ªí¸Ì­±ÁÙ¦³¨º¨Ç¼Æ¦r²Å¦Xx a y b 
+void updateT(int T[],int G[],int AB[])//ç¢ºèªè¡¨è£¡é¢é‚„æœ‰é‚£äº›æ•¸å­—ç¬¦åˆx a y b 
 {  
 	int i,tA[4],tAB[2];
 	for(i=0;i<10000;i++)
